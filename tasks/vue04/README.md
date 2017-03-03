@@ -18,7 +18,6 @@
     }
     //返回的是一个dom元素列表
 ```
-
 2. 接下来是根据被挂载的dom元素，递归遍历，寻找所有的子节点，把文本节点和其他节点分别保存到2个数组内
 ```javascript
 function scan(node, textNodeList = [], otherNodeList = []) {
@@ -43,7 +42,6 @@ function scan(node, textNodeList = [], otherNodeList = []) {
 }
 
 ```
-
 3. 把文本节点mustache语法里面的内容替换为data数据里面的内容
 * 在vue中，主要有针对文本节点的mustache语法和针对标签节点的自定义属性语法；
 * parseHtml是一项复杂的工程，根据任务内容，这次只实现文本节点的mustache语法。
@@ -66,7 +64,6 @@ function parseTextNode(textNode, data) {
     textNode.nodeValue = txt;
 }
 ```
-
 4. 整合之前的方法
 ```javascript
 function parseHtml(selector, data) {
@@ -82,7 +79,6 @@ function parseHtml(selector, data) {
     });
 }
 ```
-
 5. 构造Vue函数
 ```javascript
 function Vue(object) {
