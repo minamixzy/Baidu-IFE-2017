@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts02</title>
+    <script src="../echarts01/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:500px;"></div>
+<script>
+    const myChart = echarts.init(document.getElementById('main'));
+
+    let option = {
+        title: [
+            {
+                text: 'What my credit score?',
+                subtext: 'Puerto Rico, %decrease on a year earlier',
+                subtextStyle: {
+                    color: '#000000'
+                },
+                left: 30
+            },
+            {
+                text: 'Sources: World Bank; Census Bureau; EIU',
+                bottom: 20,
+                left: 30,
+                subtext: 'Economist',
+                subtextStyle: {
+                    color: '#000000'
+                },
+            }
+        ],
+        tooltip: {},
+        //标签
+        legend: {
+            data: ['Population', 'GDP'],
+            top: 60,
+            left: 30
+        },
+        grid: {
+            top: 100,
+            bottom: 100,
+        },
+        xAxis: [
+            {
+                data: ['2006', '07', '08', '09', '10'],
+                //设置为类目轴，以备可以把坐标轴数据调整到表格中间
+                type: 'category',
+                axisLine: {
+                    onZero: false
+                },
+                axisTick:{
+                    alignWithLabel: true
+                }
+            },
+            {
+                z: 100,
+                axisLine: {
+                    lineStyle: {
+                        color: '#ef1b1c'
+                    }
+                }
+            }
+
+        ],
+        yAxis: {
+            position: 'right',
+            inverse: true,
+            //副坐标轴
+            splitLine: {
+                z: 1,
+                lineStyle: {
+                    color: '#ffffff',
+                    width: 1
+                }
+            },
+            splitArea:{
+
+            }
+        },
+        series: [
+            {
+                name: 'Population',
+                type: 'bar',
+                data: [200, 500, 4432, 758, 921],
+                itemStyle: {
+                    normal: {
+                        color: '#00526d'
+                    }
+                }
+            },
+            {
+                name: 'GDP',
+                type: 'bar',
+                data: [1200, 3500, 1600, 2201, 1102],
+                itemStyle: {
+                    normal: {
+                        color: '#00a4dc'
+                    }
+                }
+            }
+        ],
+        //背景色
+        backgroundColor: '#cddee7'
+    }
+
+    myChart.setOption(option);
+
+
+</script>
+</body>
+</html>
