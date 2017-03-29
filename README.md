@@ -9,4 +9,4 @@
 5. [动态数据绑定（五）](https://github.com/minamixzy/Baidu-IFE-2017/tree/master/tasks/vue05)
 
 ### echarts学习
-1. [01绘制图表] (https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts01/echarts01.html)
+1. [01绘制图表](https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts01/echarts01.html)
