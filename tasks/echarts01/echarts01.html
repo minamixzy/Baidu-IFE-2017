@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src='echarts.js'></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<script>
+    const myChart = echarts.init(document.getElementById('main'));
+
+    let option = {
+        title: {
+            text: 'Echarts01'
+        },
+        tooltip: {},
+        legend: {
+            data:['产量']
+        },
+        xAxis: {
+            data:['y1', 'y12', 'y22-3']
+        },
+        yAxis: {},
+        series: [{
+            name: '产量',
+            type: 'bar',
+            data: [1200, 3500, 1600]
+        }]
+    }
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>
