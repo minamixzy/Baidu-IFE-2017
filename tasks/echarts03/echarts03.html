@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts03</title>
+    <script src="../echarts01/echarts.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<script>
+    //简易ajax函数
+    const ajax = function (url) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('get', url);
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4){
+                if(xhr.status === 200 || xhr.status === 304) {
+                    const myChart = echarts.init(document.getElementById('main'));
+                    echarts.registerMap('islands', JSON.parse(xhr.responseText));
+                    myChart.setOption({
+                        series: [{
+                            type: 'map',
+                            map: 'islands'
+                        }]
+                    });
+                }
+            }
+        }
+    }
+
+    //获取josn数据
+    onload = function () {
+        ajax('./jiangsu.json');
+    }
+</script>
+</body>
+</html>

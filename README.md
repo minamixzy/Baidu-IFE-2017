@@ -10,4 +10,5 @@
 
 ### echarts学习
 1. [01绘制图表](https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts01/echarts01.html)
-1. [02绘制图表](https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts02/echarts02.html)
+2. [02绘制图表](https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts02/echarts02.html)
+3. [03绘制地图](https://minamixzy.github.io/Baidu-IFE-2017/tasks/echarts03/echarts03.html)
