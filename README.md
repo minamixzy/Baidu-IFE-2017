@@ -16,3 +16,5 @@
 ### webgl
 1. [01简单模型](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl01/webgl01.html)
 2. [02光与影](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl02/webgl02.html)
+3. 待更新
+4. [04控制器](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl04/webgl04.html)

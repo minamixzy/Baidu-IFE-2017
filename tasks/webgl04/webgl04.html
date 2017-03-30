@@ -13,6 +13,7 @@
 
     </style>
     <script src="../webgl01/three.js"></script>
+    <script src="./TrackballControls.js"></script>
 </head>
 <body>
 <script>
@@ -96,16 +97,24 @@
             let geometry = new THREE.PlaneGeometry(150, 150, 32, 32);
             let material = new THREE.MeshLambertMaterial({color: 0x00ffff, side: THREE.DoubleSide});
             let plane = new THREE.Mesh(geometry, material);
-            plane.rotateX(Math.PI/2);
-            plane.position.y = -21;
+            plane.rotateX(Math.PI / 2);
+            plane.position.y = -23;
             plane.receiveShadow = true;
             scene.add(plane);
 
         }
 
+        //创建控制器
+        let controller
+        const initController = function () {
+            controller = new THREE.TrackballControls(camera, renderer.domElement);
+            controller.rotateSpeed = 6.0;
+        }
+
         //主渲染函数
         const render = function () {
             renderer.render(scene, camera);
+            controller.update();
             requestAnimationFrame(render);
         }
 
@@ -115,6 +124,7 @@
             initScene();
             initLight(scene);
             initCamera();
+            initController();
 
             createCarBody(scene);
             creatWheel(scene);
