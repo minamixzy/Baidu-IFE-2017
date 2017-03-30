@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebGl</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+    </style>
+    <script src="./three.js"></script>
+</head>
+<body>
+<script>
+    (function () {
+        //渲染器
+        let renderer;
+        const initRender = function () {
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+        };
+
+        //场景
+        let scene;
+        const initScene = function () {
+            scene = new THREE.Scene();
+            scene.add(new THREE.AmbientLight(0xffffff));
+        };
+
+        //镜头
+        let camera;
+        const initCamera = function (near = 1, far = 3000) {
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, near, far);
+            camera.position.set(50, 50, 50);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            scene.add(camera);
+        };
+
+        //主要材质
+        let material = new THREE.MeshBasicMaterial({color: 0x006cdd});
+
+        //汽车车体相关60*30*30
+        const createCarBody = function () {
+            let geometry = new THREE.BoxGeometry(60, 30, 30);
+            let cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+        }
+
+        //轮子模块相关
+        const creatWheel = function () {
+            let arr = [
+                {x: -20, y: -15, z: 15},
+                {x: 20, y: -15, z: 15},
+                {x: -20, y: -15, z: -15},
+                {x: 20, y: -15, z: -15}
+                ];
+            for (let i = 0; i < arr.length; i++) {
+                let geometry = new THREE.TorusGeometry(6, 2, 16, 60);
+                let torus = new THREE.Mesh(geometry, material);
+                [torus.position.x, torus.position.y, torus.position.z] = [arr[i].x, arr[i].y, arr[i].z];
+                scene.add(torus);
+            }
+        }
+        const render = function () {
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+        }
+
+        const init = function () {
+            initRender();
+            initScene();
+            initCamera();
+            createCarBody();
+            creatWheel();
+
+            render();
+        };
+
+        //启动
+        init();
+    })();
+</script>
+</body>
+</html>
