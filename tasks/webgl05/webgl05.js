@@ -118,11 +118,9 @@
     const moveCar = function () {
         keybordList.forEach((item)=>{
             if (87 in keyDown) { //w
-                console.log('inn')
                 item.position.x += 1;
             }
             if (83 in keyDown) { //s
-                console.log('inn')
                 item.position.x -= 1;
             }
         });
