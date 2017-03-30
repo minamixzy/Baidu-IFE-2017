@@ -57,21 +57,24 @@
 
     //受键盘控制的物体内容
     let keybordList = [];
+    //出事的正向角度，为和x轴正向的夹角
+    let forward = 0;
 
     //主要材质
     let material = new THREE.MeshLambertMaterial({color: 0xffffff});
 
     //汽车车体相关60*30*30
+    let cube;
     const createCarBody = function (scene) {
         let geometry = new THREE.BoxGeometry(60, 30, 30);
-        let cube = new THREE.Mesh(geometry, material);
+        cube = new THREE.Mesh(geometry, material);
         cube.castShadow = true;
         keybordList.push(cube);
         scene.add(cube);
     }
 
     //轮子模块相关
-    const creatWheel = function (scene) {
+    const creatWheel = function (father) {
         let arr = [
             {x: -20, y: -15, z: 15},
             {x: 20, y: -15, z: 15},
@@ -83,8 +86,8 @@
             let torus = new THREE.Mesh(geometry, material);
             [torus.position.x, torus.position.y, torus.position.z] = [arr[i].x, arr[i].y, arr[i].z];
             torus.castShadow = true;
-            keybordList.push(torus);
-            scene.add(torus);
+            //keybordList.push(torus);
+            father.add(torus);
         }
     }
 
@@ -102,9 +105,9 @@
 
     //监听键盘事件
     /* 监听键盘按键，把相应的键盘码记录在列表里
-    *  如果连续触发，则只记录一次
-    *  目前暂时认定W/S,A/D键冲突，不能重复记录
-    * */
+     *  如果连续触发，则只记录一次
+     *  目前暂时认定W/S,A/D键冲突，不能重复记录
+     * */
     let keyDown = {};
     const initEventlistener = function () {
         window.addEventListener('keydown', function (e) {
@@ -116,12 +119,25 @@
     }
 
     const moveCar = function () {
-        keybordList.forEach((item)=>{
+        xFoward = Math.cos(forward);
+        zFoward = Math.sin(forward);
+
+        keybordList.forEach((item) => {
             if (87 in keyDown) { //w
-                item.position.x += 1;
+                item.position.x += xFoward;
+                item.position.z += zFoward;
             }
             if (83 in keyDown) { //s
-                item.position.x -= 1;
+                item.position.x -= xFoward;
+                item.position.z -= zFoward;
+            }
+            if (68 in keyDown) { //d
+                forward += (Math.PI / 180);
+                item.rotateY(-Math.PI / 180);
+            }
+            if (65 in keyDown) { //a
+                forward -= (Math.PI / 180);
+                item.rotateY(Math.PI / 180);
             }
         });
     }
@@ -147,7 +163,7 @@
         initEventlistener();
 
         createCarBody(scene);
-        creatWheel(scene);
+        creatWheel(cube);
         createPlane(scene);
 
         render();
