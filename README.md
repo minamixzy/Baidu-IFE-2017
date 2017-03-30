@@ -18,3 +18,4 @@
 2. [02光与影](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl02/webgl02.html)
 3. 待更新
 4. [04控制器](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl04/webgl04.html)
+4. [05动画](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl05/webgl05.html)
