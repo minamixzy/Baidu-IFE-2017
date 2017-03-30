@@ -15,3 +15,4 @@
 
 ### webgl
 1. [01简单模型](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl01/webgl01.html)
+2. [02光与影](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl01/webgl01.html)
