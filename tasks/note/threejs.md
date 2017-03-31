@@ -3,7 +3,7 @@
 ## 1. 基本用法
 
 
-## x.视角控制插件
+## x.1视角控制插件
 + TrackballControls.js
 ```js
     let controller;
@@ -19,5 +19,32 @@
 ## x.2 帧数监控插件
 stats.js
 ```js
+var stats = new Stats();
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
 
+function animate() {
+
+	stats.begin();
+
+	// monitored code goes here
+
+	stats.end();
+
+	requestAnimationFrame( animate );
+
+}
+
+requestAnimationFrame( animate );
+```
+
+## x.3 外部模型导入
+根据模型的数据类型，在examples/js/loaders引入对应的加载器
+```js
+//以obj格式为例
+var loader = new THREE.OBJLoader();
+loader.load('../lib/port.obj', function(obj) {
+    mesh = obj; //储存到全局变量中
+    scene.add(obj);
+});
 ```

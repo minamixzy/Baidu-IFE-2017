@@ -9,7 +9,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
         //设置阴影
-        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.enabled = false;
         //平滑阴影
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     };
@@ -27,7 +27,7 @@
             scene.add(new THREE.AmbientLight(0xffffff, 0.3));
         }
 
-        //z轴正向照射灯光
+        //z轴正向点灯光
         const zLight = function () {
             let light = new THREE.SpotLight(0xffffff, 1);
             light.position.set(-50, 50, 100);
@@ -58,15 +58,23 @@
     //受键盘控制的物体内容
     let keybordList = [];
     //出事的正向角度，为和x轴正向的夹角
-    let forward = 0;
+    let forward = Math.PI * 7 / 12;
 
-    //导入汽车模型
-    let loader = new THREE.OBJLoader();
-    loader.load('./test.obj', function (obj) {
-        obj.castShadow = true;
-        keybordList.push(obj);
+    //导入汽车材质
+    let mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load('./ship_boat.mtl', function (meterial) {
+        //先行加载模块
+        meterial.preload();
 
-        scene.add(obj);
+        //导入汽车模型
+        let loader = new THREE.OBJLoader();
+        loader.setMaterials(meterial)
+        loader.load('./ship_boat.obj', function (obj) {
+            obj.scale.set(0.01, 0.01, 0.01)
+            keybordList.push(obj);
+
+            scene.add(obj);
+        });
     });
 
 
@@ -76,7 +84,7 @@
         let material = new THREE.MeshLambertMaterial({color: 0x00ffff, side: THREE.DoubleSide});
         let plane = new THREE.Mesh(geometry, material);
         plane.rotateX(Math.PI / 2);
-        plane.position.y = -23;
+        plane.position.y = 0;
         plane.receiveShadow = true;
         scene.add(plane);
     }
@@ -147,7 +155,7 @@
         initCamera();
         initController();
         initEventlistener();
-        
+
         createPlane(scene);
 
         render();
