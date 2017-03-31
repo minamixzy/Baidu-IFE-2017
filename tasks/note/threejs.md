@@ -39,7 +39,7 @@ requestAnimationFrame( animate );
 ```
 
 ## x.3 外部模型导入
-根据模型的数据类型，在examples/js/loaders引入对应的加载器
++ 根据模型的数据类型，在examples/js/loaders引入对应的加载器
 ```js
 //以obj格式为例
 var loader = new THREE.OBJLoader();
@@ -47,4 +47,28 @@ loader.load('../lib/port.obj', function(obj) {
     mesh = obj; //储存到全局变量中
     scene.add(obj);
 });
+```
++ 有材质的外部模型导入
+```html
+<script type="text/javascript" src="MTLLoader.js"></script>
+
+<script>
+var mtlLoader = new THREE.MTLLoader();  
+    mtlLoader.setBaseUrl( 'obj/' );  
+    mtlLoader.setPath( 'obj/' );  
+    mtlLoader.load( 'test.mtl', function( materials ) { 
+        //先预加载 材质
+        materials.preload();  
+        //然后加载模型
+        var objLoader = new THREE.OBJLoader(); 
+        //设置模型为预加载好的材质 
+        objLoader.setMaterials( materials );  
+        objLoader.setPath( 'obj/' );  
+        objLoader.load( 'test.obj', function ( object ) {  
+            scene.add( object );  
+    
+            }, onProgress, onError );  
+    
+    });  
+</script>
 ```
