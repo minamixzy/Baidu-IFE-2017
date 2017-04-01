@@ -72,3 +72,5 @@ var mtlLoader = new THREE.MTLLoader();
     });  
 </script>
 ```
+
+## x.4 着色器
