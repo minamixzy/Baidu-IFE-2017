@@ -5,7 +5,7 @@
 
 ## x.1视角控制插件
 + TrackballControls.js
-```js
+```javascript
     let controller;
     const initController = function () {
         controller = new THREE.TrackballControls(camera, renderer.domElement);
