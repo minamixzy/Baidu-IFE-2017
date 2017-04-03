@@ -1,7 +1,7 @@
 /**
  * Created by xzywww on 2017-04-02.
  */
-;(function (window, Rx) {
+;(function (window, THREE) {
     class Main{
         constructor(){
             this.initlization();
@@ -14,7 +14,7 @@
         initRender(){
             this.renderer = new THREE.WebGLRenderer();
             this.renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
+            document.body.appendChild(this.renderer.domElement);
             //设置阴影
             this.renderer.shadowMap.enabled = false;
             //平滑阴影
@@ -24,24 +24,26 @@
             this.scene = new THREE.Scene();
         }
         initLight(){
-            const globalLight = function () {
-                this.scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+            let _scene = this.scene;
+
+            const globalLight = function (scene) {
+                scene.add(new THREE.AmbientLight(0xffffff, 0.3));
             }
 
             //z轴正向点灯光
-            const zLight = function () {
+            const zLight = function (scene) {
                 let light = new THREE.SpotLight(0xffffff, 1);
                 light.position.set(-50, 50, 100);
                 light.castShadow = true;
-                this.scene.add(light);
+                scene.add(light);
             }
 
-            globalLight();
-            zLight();
+            globalLight(_scene);
+            zLight(_scene);
         }
 
     }
     new Main();
-})(window);
+})(window, THREE);
 
 
