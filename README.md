@@ -20,3 +20,5 @@
 4. [04控制器](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl04/webgl04.html)
 5. [05动画](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl05/webgl05.html)
 6. [06外部材质](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl06/webgl06.html)
+7. [07着色器初探](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl07/webgl07.html)
+8. [08物理引擎](https://minamixzy.github.io/Baidu-IFE-2017/tasks/webgl08/webgl08.html)
