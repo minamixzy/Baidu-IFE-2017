@@ -1,7 +1,11 @@
 /**
  * Created by xzywww on 2017-04-02.
  */
-;(function (window, THREE) {
+/*
+* todo 1.正向灯光
+* todo 2.根据json构建地球材质，然后通过THREE.Texture引入材质，渲染到地球上
+* */
+;(function (window, THREE, echarts) {
     //初始化程序
     class Main {
         constructor() {
@@ -47,7 +51,7 @@
             }
 
             globalLight(_scene);
-            zLight(_scene);
+            //zLight(_scene);
         }
 
         initCamera() {
@@ -62,37 +66,10 @@
             this.controller = new THREE.TrackballControls(this.camera, this.renderer.domElement);
             this.controller.rotateSpeed = 6.0;
         }
-
     }
 
     //生成一个场景
     let testObj = new Main();
-
-    //加载物品
-    (function (obj) {
-        //加载着色器
-        let material = new THREE.ShaderMaterial( {
-
-            uniforms: {
-                color:{
-                    type: 'v3',
-                    value: new THREE.Color('#60371b')
-                },
-                light: {
-                    type: 'v3',
-                    value: (new THREE.Vector3(300,100,100))
-                }
-            },
-            vertexShader: document.getElementById( 'vertexShader' ).textContent,
-            fragmentShader: document.getElementById( 'fragmentShader' ).textContent
-
-        } );
-
-        let geometry = new THREE.OctahedronBufferGeometry(60, 2);
-        let cube = new THREE.Mesh(geometry, material);
-        cube.castShadow = true;
-        obj.scene.add(cube);
-    })(testObj);
 
     //循环渲染
     const start = function () {
@@ -101,8 +78,50 @@
         requestAnimationFrame(start);
     }
 
-    start();
+    //首先生成二维的echarts数据，然后转换为三维的地球模型
+    let worldCanvas = document.createElement('canvas');
 
-})(window, THREE);
+    (function (testObj, worldCanvas) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', './world.json');
+        //异步获取数据
+        new Promise(function (resolved) {
+            xhr.onload = function () {
+                let world = xhr.responseText
+
+                worldCanvas.setOption({
+                    series: [{
+                        type: 'map',
+                        map: 'world'
+                    }]
+                })
+                resolved(worldCanvas);
+            }
+        })
+        .then(function (data) {
+            //加载物品
+            (function (obj) {
+                //加载加载地图
+                let material = new THREE.Texture(data)
+
+                let geometry = new THREE.OctahedronBufferGeometry(60, 2);
+                let cube = new THREE.Mesh(geometry, material);
+                cube.castShadow = true;
+                obj.scene.add(cube);
+            })(testObj);
+        })
+        .then(function () {
+            start();
+        })
+        .catch(function (e) {
+
+        });
+
+        xhr.send();
+    })(testObj, worldCanvas);
+
+})(window, THREE, echarts);
+
+
 
 
