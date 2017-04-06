@@ -114,7 +114,7 @@
             start();
         })
         .catch(function (e) {
-
+            console.warn(e);
         });
 
         xhr.send();
