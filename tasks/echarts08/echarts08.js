@@ -43,12 +43,14 @@
             }
 
             //z轴正向点灯光
+/*
             const zLight = function (scene) {
                 that.light = new THREE.SpotLight(0xffffff, 1);
                 that.light.position.set(-50, 50, 100);
                 that.light.castShadow = true;
                 scene.add(that.light);
             }
+*/
 
             globalLight(_scene);
             //zLight(_scene);
