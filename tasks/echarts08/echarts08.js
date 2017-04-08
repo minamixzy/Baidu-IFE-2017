@@ -101,16 +101,13 @@
             }
         })
         .then(function (data) {
-            //加载物品
-            (function (obj) {
-                //加载加载地图
-                let material = new THREE.Texture(data)
+            //加载加载地图
+            let material = new THREE.Texture(data)
 
-                let geometry = new THREE.OctahedronBufferGeometry(60, 2);
-                let cube = new THREE.Mesh(geometry, material);
-                cube.castShadow = true;
-                obj.scene.add(cube);
-            })(testObj);
+            let geometry = new THREE.OctahedronBufferGeometry(60, 2);
+            let cube = new THREE.Mesh(geometry, material);
+            cube.castShadow = true;
+            testObj.scene.add(cube);
         })
         .then(function () {
             start();
