@@ -51,7 +51,6 @@
                 scene.add(that.light);
             }
 */
-
             globalLight(_scene);
             //zLight(_scene);
         }
