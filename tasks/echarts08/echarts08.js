@@ -96,7 +96,9 @@
                 chart.setOption({
                     series: [{
                         type: 'map',
-                        map: 'world'
+                        map: 'world',
+                        roam: 'true',
+                        aspectScale: 1
                     }]
                 })
                 resolved(worldCanvas);
