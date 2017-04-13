@@ -83,7 +83,7 @@
     let worldCanvas = document.createElement('div');
 
     (function (testObj, worldCanvas) {
-        let xhr = new XMLHttpRequest()
+        let xhr = new XMLHttpRequest();
         xhr.open('get', './world.json');
         //异步获取数据
         new Promise(function (resolved) {
