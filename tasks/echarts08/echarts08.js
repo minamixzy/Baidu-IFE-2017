@@ -122,7 +122,7 @@
 
         xhr.send();
     })(testObj, worldCanvas);
-
+//@ TODO 将计划添加为实例
 })(window, THREE, echarts);
 
 
